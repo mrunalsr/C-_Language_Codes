@@ -1,99 +1,91 @@
 #include <iostream>
 using namespace std;
-void MergeArray()
+void array(int arr[], int n)
 {
-    int size1;
-    int size2;
-    int i = 0;
-    cout << "enter the size of first array : " << endl;
-    cin >> size1;
-
-    int arr1[size1];
-    cout << "enter elements in the first array : " << endl;
-    for (int i = 0; i < size1; i++)
+    cout << "enter the elements in the array : " << endl;
+    for (int i = 0; i < n; i++)
     {
-        cin >> arr1[i];
+        cin >> arr[i];
     }
-
-    cout << "The first array is : " << endl;
-    for (int i = 0; i < size1; i++)
+    cout << "The array is : " << endl;
+    for (int i = 0; i < n; i++)
     {
-        cout << arr1[i] << " ";
+        cout << arr[i] << " ";
     }
-    for (int i = 0; i < size1 - 1; i++)
+}
+void sort(int arr[], int n)
+{
+    for (int i = 0; i < n - 1; i++)
     {
-        for (int j = 0; j < size1 - i - 1; j++)
+        for (int j = 0; j < n - i - 1; j++)
         {
-            if (arr1[j] > arr1[j + 1])
+            if (arr[j] > arr[j + 1])
             {
-                int temp = arr1[j];
-                arr1[j] = arr1[j + 1];
-                arr1[j + 1] = temp;
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
             }
         }
     }
+}
 
-    cout << "enter the size of second array : " << endl;
-    cin >> size2;
-
-    int arr2[size2];
-    cout << "enter elements in the second array : " << endl;
-    for (int i = 0; i < size2; i++)
+void Merge(int arr[], int n,int arr1[],int n1)
+{
+    int size = n+n1;
+    int mergearr[size];
+    int i=0,j=0,k=0;
+    while(i<n && j<n1)
     {
-        cin >> arr2[i];
-    }
-    cout << "The second array is : " << endl;
-    for (int i = 0; i < size2; i++)
-    {
-        cout << arr2[i] << " ";
-    }
-    cout << endl;
-    for (int i = 0; i < size2 - 1; i++)
-    {
-        for (int j = 0; j < size2 - i - 1; j++)
+        if(arr[i] < arr1[j])
         {
-            if (arr2[j] > arr2[j + 1])
-            {
-                int temp = arr2[j];
-                arr2[j] = arr2[j + 1];
-                arr2[j + 1] = temp;
-            }
-        }
-    }
-
-    int size = size1 + size2;
-    int mergedarray[size];
-    // int i;
-    int j = 0;
-    int k = 0;
-    while (i < size1 && j < size2)
-    {
-        if (arr1[i] < arr2[j])
-        {
-            mergedarray[k++] = arr1[i++];
+            mergearr[k++] = arr[i++];
         }
         else
         {
-            mergedarray[k++] = arr2[j++];
+            mergearr[k++] = arr1[j++];
         }
     }
-    while (i < size1)
+    while(i<n)
     {
-        mergedarray[k++] = arr1[i++];
+        mergearr[k++] = arr[i++];
     }
-    while (j < size2)
+    while(j<n1)
     {
-        mergedarray[k++] = arr2[j++];
+        mergearr[k++]= arr1[j++];
     }
-    cout << "Merged array is : " << endl;
-    for (int i = 0; i < size; i++)
+
+    cout<<"The merged array is : "<<endl;
+    for(int i =0;i<size;i++)
     {
-        cout << mergedarray[i] << " ";
+        cout<<mergearr[i]<<" ";
     }
+
 }
 int main()
 {
+    int n, n1;
+    cout << "enter the size of array : " << endl;
+    cin >> n;
+    int arr[n];
+    array(arr,n);
+    sort(arr, n);
+    cout << "Sorted array is : " << endl;
+    for (int i = 0; i < n; i++)
+    {
+        cout << arr[i] << " ";
+    }
 
-    MergeArray();
+    cout << "enter the size of array : " << endl;
+    cin >> n1;
+    int arr1[n1];
+    array(arr1,n1);
+    sort(arr1, n1);
+    cout << "Sorted array is : " << endl;
+    for (int i = 0; i < n1; i++)
+    {
+        cout << arr1[i] << " ";
+    }
+    Merge(arr,n,arr1,n1);
+
     return 0;
 }
